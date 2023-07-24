@@ -1,22 +1,27 @@
 import gspread
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import json
+import os
 
-gc = gspread.service_account()
-
-# Open a sheet from a spreadsheet in one go
-wks = gc.open("CAB_P6_Data_pipeline_Tsla").sheet1
-
-# Update a range of cells using the top left corner address
-wks.update('A1', [[1, 2], [3, 4]])
-
-# Or update a single cell
-#wks.update('B42', "it's down there somewhere, let me take another look.")
-
-# Format the header
-wks.format('A1:B1', {'textFormat': {'bold': True}})
-
-
+# Define the get_data() function to fetch the values from your Google Spreadsheet.
 
 def get_data():
-    print("Hello World")
-get_data()
 
+# Authenticate with Google Sheets API
+gc = gspread.service_account(filename='C:\Users\sfmol\Dropbox\CAB\VSCode_GitHub\API_data_pipeline\streamlit_app.py')
+
+# Open the spreadsheet
+spreadsheet = gc.open('CAB_P6_Data_pipeline_Tsla')
+
+# Select the worksheet
+worksheet = spreadsheet.sheet1
+
+# Get all values from the worksheet as a list of lists
+data = worksheet.get_all_values()
+
+# Create a pandas DataFrame from the data
+df = pd.DataFrame(data[1:], columns=data[0])
+
+return df
