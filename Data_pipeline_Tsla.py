@@ -25,6 +25,3 @@ def get_data():
         return None
 
 get_data()
-
-
-
