@@ -10,7 +10,6 @@ import os
 def get_data():
 
 
-
 # Authenticate with Google Sheets API
     gc = gspread.service_account(filename=r'C:\Users\sfmol\Dropbox\CAB\VSCode_GitHub\API_data_pipeline\streamlit_app.py')
 
